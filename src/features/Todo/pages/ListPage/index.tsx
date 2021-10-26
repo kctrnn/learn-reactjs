@@ -1,6 +1,7 @@
 import { Container, Typography } from '@mui/material';
 import Backdrop from 'components/Backdrop';
 import Modal from 'components/Modal';
+import TodoForm from 'features/Todo/components/TodoForm';
 import TodoList from 'features/Todo/components/TodoList';
 import { Todo } from 'models';
 import queryString from 'query-string';
@@ -88,7 +89,13 @@ function ListPage() {
   return (
     <div>
       <Container>
-        <Typography variant="h6" component="h3" mb={2}>
+        <Typography variant="h6" component="h3">
+          🤔 What to do
+        </Typography>
+
+        <TodoForm />
+
+        <Typography variant="h6" component="h3" mt={4} mb={2}>
           TODO LIST
         </Typography>
 
