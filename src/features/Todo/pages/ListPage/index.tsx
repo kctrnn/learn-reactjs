@@ -3,7 +3,7 @@ import Backdrop from 'components/Backdrop';
 import Modal from 'components/Modal';
 import TodoForm from 'features/Todo/components/TodoForm';
 import TodoList from 'features/Todo/components/TodoList';
-import { Todo } from 'models';
+import { Todo, TodoFormValues } from 'models';
 import queryString from 'query-string';
 import { useEffect, useMemo, useState } from 'react';
 import { useHistory, useLocation, useRouteMatch } from 'react-router-dom';
@@ -86,6 +86,17 @@ function ListPage() {
     return todoList.filter((todo) => filteredStatus === 'all' || filteredStatus === todo.status);
   }, [todoList, filteredStatus]);
 
+  const handleTodoFormSubmit = (values: TodoFormValues) => {
+    const newTodo: Todo = {
+      id: todoList.length + 1,
+      text: values.text,
+      status: 'new',
+    };
+
+    const newTodoList = [...todoList, newTodo];
+    setTodoList(newTodoList);
+  };
+
   return (
     <div>
       <Container>
@@ -93,7 +104,7 @@ function ListPage() {
           🤔 What to do
         </Typography>
 
-        <TodoForm />
+        <TodoForm onSubmit={handleTodoFormSubmit} />
 
         <Typography variant="h6" component="h3" mt={4} mb={2}>
           TODO LIST
