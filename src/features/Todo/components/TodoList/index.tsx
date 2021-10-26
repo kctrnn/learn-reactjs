@@ -10,7 +10,7 @@ export interface TodoListProps {
 
 function TodoList({ todoList, onDeleteClick, onTodoClick }: TodoListProps) {
   return (
-    <Grid container spacing={4}>
+    <Grid container spacing={4} mb={4}>
       {todoList.map((todo) => (
         <Grid item key={todo.id} xs={12} md={6} lg={4}>
           <TodoCard todo={todo} onClick={onTodoClick} onDelete={onDeleteClick} />

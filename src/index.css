@@ -74,3 +74,9 @@ a {
 .btn--alt:hover {
   background-color: #f8dae9;
 }
+
+.btn--small {
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  margin-left: 0;
+}
