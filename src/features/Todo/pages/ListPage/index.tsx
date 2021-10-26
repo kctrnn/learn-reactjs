@@ -1,13 +1,14 @@
-import { Container } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import Backdrop from 'components/Backdrop';
 import Modal from 'components/Modal';
-import TodoCard from 'features/Todo/components/TodoCard';
+import TodoList from 'features/Todo/components/TodoList';
+import { Todo } from 'models';
 import { useState } from 'react';
 import './styles.scss';
 
 function ListPage() {
-  const todoList = [
+  const initTodoList: Todo[] = [
     {
       id: 1,
       text: 'Eat',
@@ -26,6 +27,7 @@ function ListPage() {
   ];
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [todoList, setTodoList] = useState<Todo[]>(initTodoList);
 
   const handleDelete = () => {
     setModalIsOpen(true);
@@ -38,11 +40,11 @@ function ListPage() {
   return (
     <Box>
       <Container>
-        <h3>Todo List</h3>
+        <Typography variant="h6" component="h3" mb={1}>
+          Todo List
+        </Typography>
 
-        {todoList.map((todo) => (
-          <TodoCard key={todo.id} text={todo.text} onDelete={handleDelete} />
-        ))}
+        <TodoList todoList={todoList} onDeleteClick={handleDelete} />
 
         {modalIsOpen && <Modal onClose={handleCloseModal} onConfirm={handleCloseModal} />}
         {modalIsOpen && <Backdrop onCloseModal={handleCloseModal} />}
