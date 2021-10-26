@@ -1,11 +1,9 @@
-import TodoCard from 'features/Todo/components/TodoCard';
+import TodoFeature from 'features/Todo';
 
 function App() {
   return (
     <div className="app">
-      <TodoCard text="Learn HTML/CSS" />
-      <TodoCard text="Learn Javascript" />
-      <TodoCard text="Learn ReactJS" />
+      <TodoFeature />
     </div>
   );
 }
