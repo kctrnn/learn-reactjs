@@ -4,10 +4,10 @@ import Backdrop from 'components/Backdrop';
 import Modal from 'components/Modal';
 import TodoList from 'features/Todo/components/TodoList';
 import { Todo } from 'models';
-import { useMemo, useState } from 'react';
-import './styles.scss';
 import queryString from 'query-string';
+import { useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import './styles.scss';
 
 function ListPage() {
   const initTodoList: Todo[] = [
@@ -44,6 +44,15 @@ function ListPage() {
     setModalIsOpen(false);
   };
 
+  const handleTodoClick = (todoId: number) => {
+    const newTodoList = [...todoList];
+    const clickedTodo = todoList.find((todo) => todo.id === todoId);
+
+    console.log(clickedTodo);
+
+    setTodoList(newTodoList);
+  };
+
   const renderedTodoList = useMemo(() => {
     return todoList.filter((todo) => filteredStatus === 'all' || filteredStatus === todo.status);
   }, [todoList, filteredStatus]);
@@ -55,7 +64,11 @@ function ListPage() {
           Todo List
         </Typography>
 
-        <TodoList todoList={renderedTodoList} onDeleteClick={handleDelete} />
+        <TodoList
+          todoList={renderedTodoList}
+          onTodoClick={handleTodoClick}
+          onDeleteClick={handleDelete}
+        />
 
         {modalIsOpen && <Modal onClose={handleCloseModal} onConfirm={handleCloseModal} />}
         {modalIsOpen && <Backdrop onCloseModal={handleCloseModal} />}

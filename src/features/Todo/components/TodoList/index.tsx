@@ -5,14 +5,15 @@ import TodoCard from '../TodoCard';
 export interface TodoListProps {
   todoList: Todo[];
   onDeleteClick: () => void;
+  onTodoClick: (todoId: number) => void;
 }
 
-function TodoList({ todoList, onDeleteClick }: TodoListProps) {
+function TodoList({ todoList, onDeleteClick, onTodoClick }: TodoListProps) {
   return (
     <Grid container spacing={4}>
       {todoList.map((todo) => (
         <Grid item key={todo.id} xs={12} md={6} lg={4}>
-          <TodoCard text={todo.text} onDelete={onDeleteClick} />
+          <TodoCard todo={todo} onClick={onTodoClick} onDelete={onDeleteClick} />
         </Grid>
       ))}
     </Grid>

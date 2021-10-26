@@ -1,23 +1,38 @@
+import classNames from 'classnames';
+import { Todo } from 'models';
 import './styles.scss';
 
 export interface TodoCardProps {
-  text: string;
-  isDone?: boolean;
+  todo: Todo;
   onDelete: () => void;
+  onClick: (todoId: number) => void;
 }
 
-function TodoCard({ text, isDone, onDelete }: TodoCardProps) {
+function TodoCard({ todo, onClick, onDelete }: TodoCardProps) {
   const handleDeleteClick = () => {
     if (!onDelete) return;
 
     onDelete();
   };
 
-  return (
-    <div className="todo-card">
-      <h2>{text}</h2>
+  const handleClick = (todoId: number) => {
+    if (!onClick) return;
 
-      <div className="actions">
+    onClick(todoId);
+  };
+
+  return (
+    <div
+      className={classNames('todo-card', {
+        completed: todo.status === 'completed',
+      })}
+      onClick={() => handleClick(todo.id)}
+    >
+      <h2>{todo.text}</h2>
+
+      <div>
+        <p>{`Status: ${todo.status}`}</p>
+
         <button className="btn" onClick={handleDeleteClick}>
           Delete
         </button>

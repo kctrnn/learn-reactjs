@@ -2,16 +2,32 @@
   // width: 20rem;
   padding: 1rem;
   border-radius: 4px;
-
   background-color: white;
+
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 200ms ease-in-out;
+  cursor: pointer;
+
+  &.completed {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
 
   & > h2 {
     margin-bottom: 1rem;
     font-size: 1.4rem;
   }
 
-  & > .actions {
-    text-align: right;
+  & > p {
+    font-size: 0.875rem;
+  }
+
+  & > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
   }
 }
