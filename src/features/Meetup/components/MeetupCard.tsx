@@ -4,6 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Meetup } from 'models';
+import { Link } from 'react-router-dom';
 
 export interface MeetupCardProps {
   meetup: Meetup;
@@ -29,9 +30,15 @@ function MeetupCard({ meetup }: MeetupCardProps) {
       </CardActionArea>
 
       <CardActions sx={{ justifyContent: 'center', py: 2 }}>
-        <Button size="small" color="primary" variant="outlined">
+        <Button size="small" variant="outlined">
           Add to favorites
         </Button>
+
+        <Link to={`/meetups/${meetup.id}`}>
+          <Button size="small" variant="outlined" sx={{ ml: 2 }}>
+            Edit
+          </Button>
+        </Link>
       </CardActions>
     </Card>
   );
