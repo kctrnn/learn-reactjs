@@ -29,12 +29,12 @@ function Header() {
             <Button color="inherit">Todo</Button>
           </LinkStyled>
 
-          <LinkStyled to="/">
+          <LinkStyled to="/meetups">
             <Button color="inherit">Meetups</Button>
           </LinkStyled>
 
-          <LinkStyled to="/">
-            <Button color="inherit">Food</Button>
+          <LinkStyled to="/favorites">
+            <Button color="inherit">My Favorites</Button>
           </LinkStyled>
         </Toolbar>
       </AppBar>

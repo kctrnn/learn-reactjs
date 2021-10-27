@@ -1,13 +1,14 @@
 import { useRouteMatch, Switch, Route } from 'react-router-dom';
-import DetailPage from './pages/DetailPage';
 import ListPage from './pages/ListPage';
+import DetailPage from './pages/DetailPage';
 
 function TodoFeature() {
   const match = useRouteMatch();
 
   return (
     <div>
-      TODO SHARE UI
+      {/* TODO SHARE UI */}
+
       <Switch>
         <Route exact path={match.path}>
           <ListPage />

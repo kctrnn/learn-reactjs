@@ -25,17 +25,12 @@ const ModalInner = styled(Box)(({ theme }) => ({
 
 export interface TodoListProps {
   todoList: Todo[];
-  onTodoClick: (todoId: number) => void;
-  onDelete: (todoId: number) => void;
+  onTodoClick?: (todoId: number) => void;
+  onDelete?: (todoId: number) => void;
 }
 
 function TodoList({ todoList, onTodoClick, onDelete }: TodoListProps) {
   const [open, setOpen] = useState(false);
-
-  const handleClick = (todoId: number) => {
-    if (!onTodoClick) return;
-    onTodoClick(todoId);
-  };
 
   const handleDeleteClick = (e: MouseEvent) => {
     e.stopPropagation();
@@ -43,6 +38,11 @@ function TodoList({ todoList, onTodoClick, onDelete }: TodoListProps) {
   };
 
   const handleClose = () => setOpen(false);
+
+  const handleClick = (todoId: number) => {
+    if (!onTodoClick) return;
+    onTodoClick(todoId);
+  };
 
   const handleConfirm = (todoId: number) => {
     if (!onDelete) return;

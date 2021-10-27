@@ -1,37 +1,20 @@
 import { Container, Typography } from '@mui/material';
+import { TODO_LIST } from 'constants/index';
 import TodoForm from 'features/Todo/components/TodoForm';
 import TodoList from 'features/Todo/components/TodoList';
 import { Todo, TodoFormValues } from 'models';
 import queryString from 'query-string';
 import { useEffect, useMemo, useState } from 'react';
 import { useHistory, useLocation, useRouteMatch } from 'react-router-dom';
-import './styles.scss';
 
 type FilterStatus = 'all' | 'new' | 'completed';
 
 function ListPage() {
-  const initTodoList: Todo[] = [
-    {
-      id: 1,
-      text: 'Eat',
-      status: 'new',
-    },
-    {
-      id: 2,
-      text: 'Sleep',
-      status: 'completed',
-    },
-    {
-      id: 3,
-      text: 'Code',
-      status: 'new',
-    },
-  ];
   const location = useLocation();
   const history = useHistory();
   const match = useRouteMatch();
 
-  const [todoList, setTodoList] = useState<Todo[]>(initTodoList);
+  const [todoList, setTodoList] = useState<Todo[]>(TODO_LIST);
 
   // const [filteredStatus, setFilteredStatus] = useState('all');
   const [filteredStatus, setFilteredStatus] = useState(() => {
@@ -45,6 +28,11 @@ function ListPage() {
     const params = queryString.parse(location.search);
     setFilteredStatus(params.status || 'all');
   }, [location.search]);
+
+  // const renderedTodoList = todoList.filter(todo => filteredStatus === 'all' || filteredStatus === todo.status);
+  const renderedTodoList = useMemo(() => {
+    return todoList.filter((todo) => filteredStatus === 'all' || filteredStatus === todo.status);
+  }, [todoList, filteredStatus]);
 
   const handleTodoClick = (todoId: number) => {
     const newTodoList = [...todoList];
@@ -66,21 +54,6 @@ function ListPage() {
     setTodoList(newTodoList);
   };
 
-  const handleFilterStatusClick = (newFilterStatus: FilterStatus) => {
-    // setFilteredStatus(newFilterStatus);
-
-    const queryParams = { status: newFilterStatus };
-    history.push({
-      pathname: match.path,
-      search: queryString.stringify(queryParams),
-    });
-  };
-
-  // const renderedTodoList = todoList.filter(todo => filteredStatus === 'all' || filteredStatus === todo.status);
-  const renderedTodoList = useMemo(() => {
-    return todoList.filter((todo) => filteredStatus === 'all' || filteredStatus === todo.status);
-  }, [todoList, filteredStatus]);
-
   const handleTodoFormSubmit = (values: TodoFormValues) => {
     const newTodo: Todo = {
       id: todoList.length + 1,
@@ -89,7 +62,18 @@ function ListPage() {
     };
 
     const newTodoList = [...todoList, newTodo];
+
     setTodoList(newTodoList);
+  };
+
+  const handleFilterStatusClick = (newFilterStatus: FilterStatus) => {
+    // setFilteredStatus(newFilterStatus);
+
+    const queryParams = { status: newFilterStatus };
+    history.push({
+      pathname: match.path,
+      search: queryString.stringify(queryParams),
+    });
   };
 
   return (

@@ -40,3 +40,33 @@ const renderedTodoList = useMemo(() => {
 
 <TodoList todoList={renderedTodoList} />;
 ```
+
+### 📰 Form module
+
+- 1 dự án có rất nhiều form
+- Mỗi form đều xử lí những vấn đề như: default values, submit form, validation, form errors, ...
+
+--> Không có cách quản lý sẽ dẫn đến việc lặp đi lặp lại những vấn đề trên rất nhiều
+
+> Solution
+
+![form](https://user-images.githubusercontent.com/90959206/138994205-f042fc25-6327-419b-aa93-2098a79454e0.png)
+
+```
+src
+|__ components
+|  |__ FormFields (base controls)
+|     |__ InputField.tsx
+|     |__ PasswordField.tsx
+|     |__ ...
+|
+|__ features
+|  |__ Todo
+|     |__ components
+|     |  |__ TodoForm (form component)
+|     |
+|     |__ pages
+|        |__ ListPage (page/container)
+|
+|__ App.tsx
+```
