@@ -1,5 +1,4 @@
-.todo-card {
-  // width: 20rem;
+.todo-item {
   padding: 1rem;
   border-radius: 4px;
   background-color: white;
@@ -29,6 +28,6 @@
   }
 
   &:hover {
-    transform: translateY(-4px);
+    transform: translateY(-2px);
   }
 }

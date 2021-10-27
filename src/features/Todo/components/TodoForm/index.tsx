@@ -9,7 +9,7 @@ export interface TodoFormProps {
 }
 
 const schema = yup.object().shape({
-  text: yup.string().required('Please enter todo').min(5, 'Todo is too short'),
+  text: yup.string().required('Please enter todo').min(3, 'Todo is too short'),
 });
 
 function TodoForm({ onSubmit }: TodoFormProps) {

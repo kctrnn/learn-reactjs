@@ -1,6 +1,4 @@
 import { Container, Typography } from '@mui/material';
-import Backdrop from 'components/Backdrop';
-import Modal from 'components/Modal';
 import TodoForm from 'features/Todo/components/TodoForm';
 import TodoList from 'features/Todo/components/TodoList';
 import { Todo, TodoFormValues } from 'models';
@@ -33,7 +31,6 @@ function ListPage() {
   const history = useHistory();
   const match = useRouteMatch();
 
-  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [todoList, setTodoList] = useState<Todo[]>(initTodoList);
 
   // const [filteredStatus, setFilteredStatus] = useState('all');
@@ -45,18 +42,9 @@ function ListPage() {
   // trigger re-render if change URL
   // example: /todos/?status=completed -> setFilteredStatus('completed');
   useEffect(() => {
-    console.log(21);
     const params = queryString.parse(location.search);
     setFilteredStatus(params.status || 'all');
   }, [location.search]);
-
-  const handleDelete = () => {
-    setModalIsOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setModalIsOpen(false);
-  };
 
   const handleTodoClick = (todoId: number) => {
     const newTodoList = [...todoList];
@@ -67,6 +55,14 @@ function ListPage() {
       status: newTodoList[index].status === 'new' ? 'completed' : 'new',
     };
 
+    setTodoList(newTodoList);
+  };
+
+  const handleDeleteTodo = (todoId: number) => {
+    const newTodoList = [...todoList];
+    const index = todoList.findIndex((todo) => todo.id === todoId) - 1;
+
+    newTodoList.splice(index, 1);
     setTodoList(newTodoList);
   };
 
@@ -81,7 +77,6 @@ function ListPage() {
   };
 
   // const renderedTodoList = todoList.filter(todo => filteredStatus === 'all' || filteredStatus === todo.status);
-
   const renderedTodoList = useMemo(() => {
     return todoList.filter((todo) => filteredStatus === 'all' || filteredStatus === todo.status);
   }, [todoList, filteredStatus]);
@@ -113,7 +108,7 @@ function ListPage() {
         <TodoList
           todoList={renderedTodoList}
           onTodoClick={handleTodoClick}
-          onDeleteClick={handleDelete}
+          onDelete={handleDeleteTodo}
         />
 
         {/* Filter */}
@@ -138,8 +133,8 @@ function ListPage() {
           </button>
         </div>
 
-        {modalIsOpen && <Modal onClose={handleCloseModal} onConfirm={handleCloseModal} />}
-        {modalIsOpen && <Backdrop onCloseModal={handleCloseModal} />}
+        {/* {modalIsOpen && <Modal onClose={handleCloseModal} onConfirm={handleCloseModal} />}
+        {modalIsOpen && <Backdrop onCloseModal={handleCloseModal} />} */}
       </Container>
     </div>
   );
