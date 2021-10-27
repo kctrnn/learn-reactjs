@@ -26,11 +26,11 @@ function Header() {
           </Typography>
 
           <LinkStyled to="/todos">
-            <Button color="inherit">Todo</Button>
+            <Button color="inherit">Todos</Button>
           </LinkStyled>
 
           <LinkStyled to="/meetups">
-            <Button color="inherit">Meetup</Button>
+            <Button color="inherit">Meetups</Button>
           </LinkStyled>
 
           <LinkStyled to="/favorites">
