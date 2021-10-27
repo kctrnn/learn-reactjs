@@ -1,10 +1,10 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Button } from '@mui/material';
 import { Box } from '@mui/system';
 import { InputField, TextareaField } from 'components/FormFields';
 import { Meetup } from 'models';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
 
 export interface MeetupFormProps {
   onSubmit?: (formValues: Meetup) => void;
@@ -28,8 +28,12 @@ function MeetupForm({ onSubmit, initialValues }: MeetupFormProps) {
     resolver: yupResolver(schema),
   });
 
-  const handleFormSubmit = (formValues: Meetup) => {
-    console.log(formValues);
+  const handleFormSubmit = async (formValues: Meetup) => {
+    try {
+      await onSubmit?.(formValues);
+    } catch (error) {
+      console.log('Failed to submit meetup form', error);
+    }
   };
 
   return (

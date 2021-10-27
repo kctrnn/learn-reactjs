@@ -30,7 +30,7 @@ function Header() {
           </LinkStyled>
 
           <LinkStyled to="/meetups">
-            <Button color="inherit">Meetups</Button>
+            <Button color="inherit">Meetup</Button>
           </LinkStyled>
 
           <LinkStyled to="/favorites">
