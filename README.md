@@ -70,3 +70,32 @@ src
 |
 |__ App.tsx
 ```
+
+### API module
+
+#### Why
+
+Thiết lập một `HTTP client` và đảm bảo tất cả các `HTTP requests, response` đều phải đi qua nó, nhằm mục đích xử lý những tác vụ chung như:
+
+- Thêm common headers: content-type,...
+- Attach thêm token và xử lý expired token
+- Xử lý lỗi chung
+
+#### How
+
+![api](https://kctrnn.vercel.app/assets/images/api-module-9ca34b1789d62ac4a31759bc7f0872b8.png)
+
+```
+src
+|__ api
+| |__ axiosClient.js : http client for our website
+| |__ productApi.js : all apis of product resources
+| |__ categoryApi.js
+| |__ userApi.js
+| |__ ...
+|
+|__ components
+|__ features
+|__ ...
+|__ App.js
+```
