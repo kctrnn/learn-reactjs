@@ -4,6 +4,7 @@ import meetupApi from 'api/meetupApi';
 import { Meetup } from 'models';
 import { useEffect, useState } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import MeetupForm from '../components/MeetupForm';
 
 const Wrapper = styled(Box)(({ theme }) => ({
@@ -59,6 +60,7 @@ function AddEditPage() {
     }
 
     // Show toast success
+    toast.success('Save meetup successfully', { icon: '🚀' });
 
     // Redirect to meetup list page
     history.push('/meetups');

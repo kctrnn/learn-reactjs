@@ -3,12 +3,12 @@ import { Box } from '@mui/system';
 import { TODO_LIST } from 'constants/index';
 import TodoForm from 'features/Todo/components/TodoForm';
 import TodoList from 'features/Todo/components/TodoList';
-import { Todo, TodoFormValues } from 'models';
+import { FilterStatus, Todo, TodoFormValues } from 'models';
 import queryString from 'query-string';
 import { useEffect, useMemo, useState } from 'react';
 import { useHistory, useLocation, useRouteMatch } from 'react-router-dom';
-
-type FilterStatus = 'all' | 'new' | 'completed';
+import { toast } from 'react-toastify';
+import TodoFilter from '../components/TodoFilter';
 
 function ListPage() {
   const location = useLocation();
@@ -53,6 +53,9 @@ function ListPage() {
 
     newTodoList.splice(index, 1);
     setTodoList(newTodoList);
+
+    // Show toast success
+    toast.success('Delete todo successfully', { icon: '😥' });
   };
 
   const handleTodoFormSubmit = (values: TodoFormValues) => {
@@ -67,6 +70,9 @@ function ListPage() {
     const newTodoList = [...todoList, newTodo];
 
     setTodoList(newTodoList);
+
+    // Show toast success
+    toast.success('Add todo successfully', { icon: '🚀' });
   };
 
   const handleFilterStatusClick = (newFilterStatus: FilterStatus) => {
@@ -98,27 +104,7 @@ function ListPage() {
           onDelete={handleDeleteTodo}
         />
 
-        {/* Filter */}
-        <div>
-          <button
-            className="btn btn--alt btn--small"
-            onClick={() => handleFilterStatusClick('all')}
-          >
-            Show All
-          </button>
-          <button
-            className="btn btn--alt btn--small"
-            onClick={() => handleFilterStatusClick('completed')}
-          >
-            Show Completed
-          </button>
-          <button
-            className="btn btn--alt btn--small"
-            onClick={() => handleFilterStatusClick('new')}
-          >
-            Show New
-          </button>
-        </div>
+        <TodoFilter onFilterStatusClick={handleFilterStatusClick} />
 
         {/* {modalIsOpen && <Modal onClose={handleCloseModal} onConfirm={handleCloseModal} />}
         {modalIsOpen && <Backdrop onCloseModal={handleCloseModal} />} */}

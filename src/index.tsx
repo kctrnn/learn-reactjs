@@ -2,6 +2,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
@@ -19,6 +21,8 @@ ReactDOM.render(
         <App />
       </ThemeProvider>
     </Router>
+
+    <ToastContainer position="bottom-left" />
   </React.StrictMode>,
   document.getElementById('root')
 );
