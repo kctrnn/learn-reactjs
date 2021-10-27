@@ -1,10 +1,20 @@
 import { Button, Container, Stack, Typography } from '@mui/material';
 import { Box } from '@mui/system';
+import meetupApi from 'api/meetupApi';
 import { MEETUP_LIST } from 'constants/index';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import MeetupList from '../components/MeetupList';
 
 function ListPage() {
+  useEffect(() => {
+    const fetchMeetupList = async () => {
+      const response = await meetupApi.getAll();
+      console.log(response);
+    };
+
+    fetchMeetupList();
+  }, []);
   return (
     <Box py={4}>
       <Container maxWidth="sm">
