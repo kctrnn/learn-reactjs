@@ -1,10 +1,12 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import App from './App';
+import { store } from './app/store';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
@@ -16,13 +18,15 @@ const theme = createTheme({
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <ThemeProvider theme={theme}>
-        <App />
-      </ThemeProvider>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
+      </Router>
 
-    <ToastContainer position="bottom-left" />
+      <ToastContainer position="bottom-left" />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
