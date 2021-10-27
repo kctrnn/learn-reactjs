@@ -31,9 +31,12 @@ export interface TodoListProps {
 
 function TodoList({ todoList, onTodoClick, onDelete }: TodoListProps) {
   const [open, setOpen] = useState(false);
+  const [selectedTodoId, setSelectedTodoId] = useState(0);
 
-  const handleDeleteClick = (e: MouseEvent) => {
+  const handleDeleteClick = (e: MouseEvent, todoId: number) => {
     e.stopPropagation();
+
+    setSelectedTodoId(todoId);
     setOpen(true);
   };
 
@@ -44,10 +47,10 @@ function TodoList({ todoList, onTodoClick, onDelete }: TodoListProps) {
     onTodoClick(todoId);
   };
 
-  const handleConfirm = (todoId: number) => {
+  const handleConfirm = () => {
     if (!onDelete) return;
 
-    onDelete(todoId);
+    onDelete(selectedTodoId);
     setOpen(false);
   };
 
@@ -65,7 +68,7 @@ function TodoList({ todoList, onTodoClick, onDelete }: TodoListProps) {
 
             <div>
               <p>{`Status: ${todo.status}`}</p>
-              <button className="btn" onClick={handleDeleteClick}>
+              <button className="btn" onClick={(e) => handleDeleteClick(e, todo.id)}>
                 Delete
               </button>
             </div>
@@ -79,7 +82,7 @@ function TodoList({ todoList, onTodoClick, onDelete }: TodoListProps) {
                 Cancel
               </button>
 
-              <button className="btn" onClick={() => handleConfirm(todo.id)}>
+              <button className="btn" onClick={handleConfirm}>
                 Confirm
               </button>
             </ModalInner>

@@ -1,4 +1,5 @@
 import { Container, Typography } from '@mui/material';
+import { Box } from '@mui/system';
 import { TODO_LIST } from 'constants/index';
 import TodoForm from 'features/Todo/components/TodoForm';
 import TodoList from 'features/Todo/components/TodoList';
@@ -48,15 +49,17 @@ function ListPage() {
 
   const handleDeleteTodo = (todoId: number) => {
     const newTodoList = [...todoList];
-    const index = todoList.findIndex((todo) => todo.id === todoId) - 1;
+    const index = todoList.findIndex((todo) => todo.id === todoId);
 
     newTodoList.splice(index, 1);
     setTodoList(newTodoList);
   };
 
   const handleTodoFormSubmit = (values: TodoFormValues) => {
+    const lastItemId = todoList[todoList.length - 1].id;
+
     const newTodo: Todo = {
-      id: todoList.length + 1,
+      id: lastItemId + 1,
       text: values.text,
       status: 'new',
     };
@@ -77,7 +80,7 @@ function ListPage() {
   };
 
   return (
-    <div>
+    <Box pt={4}>
       <Container>
         <Typography variant="h6" component="h3">
           🤔 What to do
@@ -120,7 +123,7 @@ function ListPage() {
         {/* {modalIsOpen && <Modal onClose={handleCloseModal} onConfirm={handleCloseModal} />}
         {modalIsOpen && <Backdrop onCloseModal={handleCloseModal} />} */}
       </Container>
-    </div>
+    </Box>
   );
 }
 
