@@ -1,4 +1,4 @@
-import { Button, Container } from '@mui/material';
+import { Button, Container, Typography } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -19,38 +19,44 @@ function FavoriteFeature() {
 
   return (
     <Container maxWidth="md" sx={{ pt: 4 }}>
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Title</TableCell>
-              <TableCell>Description</TableCell>
-              <TableCell>Address</TableCell>
-              <TableCell>Actions</TableCell>
-            </TableRow>
-          </TableHead>
+      {favoriteList.length === 0 && (
+        <Typography align="center">You got no favorites yet. Start adding some?</Typography>
+      )}
 
-          <TableBody>
-            {favoriteList.map((favorite) => (
-              <TableRow
-                key={favorite.id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {favorite.title}
-                </TableCell>
-                <TableCell>{favorite.description}</TableCell>
-                <TableCell>{favorite.address}</TableCell>
-                <TableCell>
-                  <Button size="small" onClick={() => handleRemoveClick(favorite.id || '')}>
-                    Remove
-                  </Button>
-                </TableCell>
+      {favoriteList.length > 0 && (
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Title</TableCell>
+                <TableCell>Description</TableCell>
+                <TableCell>Address</TableCell>
+                <TableCell>Actions</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+
+            <TableBody>
+              {favoriteList.map((favorite) => (
+                <TableRow
+                  key={favorite.id}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {favorite.title}
+                  </TableCell>
+                  <TableCell>{favorite.description}</TableCell>
+                  <TableCell>{favorite.address}</TableCell>
+                  <TableCell>
+                    <Button size="small" onClick={() => handleRemoveClick(favorite.id || '')}>
+                      Remove
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
     </Container>
   );
 }

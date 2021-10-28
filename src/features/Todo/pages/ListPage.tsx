@@ -86,7 +86,7 @@ function ListPage() {
   };
 
   return (
-    <Box pt={4}>
+    <Box py={4}>
       <Container>
         <Typography variant="h6" component="h3">
           🤔 What to do
