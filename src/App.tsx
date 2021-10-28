@@ -7,7 +7,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="app">
+    <>
       <Header />
 
       <Switch>
@@ -29,7 +29,7 @@ function App() {
           <NotFound />
         </Route>
       </Switch>
-    </div>
+    </>
   );
 }
 
