@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosRequestHeaders, AxiosResponse } from 'axios';
+import { StorageKeys } from 'constants/index';
 
 const axiosClient = axios.create({
   baseURL: 'https://json-server-kctrnn.herokuapp.com/api',
@@ -12,7 +13,7 @@ axiosClient.interceptors.request.use(
   function (config: AxiosRequestConfig) {
     const customHeaders: AxiosRequestHeaders = {};
 
-    const accessToken = localStorage.getItem('access-token');
+    const accessToken = localStorage.getItem(StorageKeys.TOKEN);
     if (accessToken) {
       customHeaders.Authorization = `Bearer ${accessToken}`;
     }
