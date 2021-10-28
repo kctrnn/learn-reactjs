@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosRequestConfig, AxiosRequestHeaders, AxiosResponse } from 'axios';
 
 const axiosClient = axios.create({
   baseURL: 'https://json-server-kctrnn.herokuapp.com/api',
@@ -10,7 +10,20 @@ const axiosClient = axios.create({
 // Add a request interceptor
 axiosClient.interceptors.request.use(
   function (config: AxiosRequestConfig) {
-    return config;
+    const customHeaders: AxiosRequestHeaders = {};
+
+    const accessToken = localStorage.getItem('access-token');
+    if (accessToken) {
+      customHeaders.Authorization = `Bearer ${accessToken}`;
+    }
+
+    return {
+      ...config,
+      headers: {
+        ...customHeaders, // auto attach token
+        ...config.headers, // can override for some requests
+      },
+    };
   },
 
   function (error) {
