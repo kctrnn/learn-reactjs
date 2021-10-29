@@ -1,12 +1,34 @@
 import { LockOutlined } from '@mui/icons-material';
 import { Avatar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
+import { unwrapResult } from '@reduxjs/toolkit';
+import { useAppDispatch } from 'app/hooks';
 import { LoginPayload } from 'models';
+import { toast } from 'react-toastify';
+import { login } from '../authSlice';
 import LoginForm from './LoginForm';
 
-function Login() {
-  const handleSubmit = (values: LoginPayload) => {
-    console.log(values);
+export interface LoginProps {
+  onCloseDialog?: () => void;
+}
+
+function Login({ onCloseDialog }: LoginProps) {
+  const dispatch = useAppDispatch();
+
+  const handleSubmit = async (values: LoginPayload) => {
+    try {
+      const action = login(values);
+      const resultAction = await dispatch(action);
+      unwrapResult(resultAction);
+
+      if (onCloseDialog) {
+        onCloseDialog();
+      }
+
+      toast.success('Login successfully', { icon: '🎉' });
+    } catch (err) {
+      toast.error('Failed to login');
+    }
   };
 
   return (

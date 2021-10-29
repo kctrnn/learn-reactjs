@@ -122,7 +122,9 @@ function Header() {
       </Menu>
 
       <Dialog open={open} onClose={handleClose}>
-        <DialogContent>{mode === MODE.LOGIN ? <Login /> : <Register />}</DialogContent>
+        <DialogContent>
+          {mode === MODE.LOGIN ? <Login onCloseDialog={handleClose} /> : <Register />}
+        </DialogContent>
 
         <DialogActions sx={{ justifyContent: 'center' }}>
           {mode === MODE.LOGIN && (

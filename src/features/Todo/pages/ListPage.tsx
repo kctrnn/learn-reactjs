@@ -55,7 +55,7 @@ function ListPage() {
     setTodoList(newTodoList);
 
     // Show toast success
-    toast.success('Delete todo successfully', { icon: '😥' });
+    toast.info('Delete todo successfully', { icon: '😥' });
   };
 
   const handleTodoFormSubmit = (values: TodoFormValues) => {
