@@ -11,7 +11,7 @@ const Flex = styled(Box)({
   alignItems: 'center',
   justifyContent: 'space-between',
 
-  '& > *:first-child': {
+  '& > *:first-of-type': {
     marginRight: '1rem',
   },
 });

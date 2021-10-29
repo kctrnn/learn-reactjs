@@ -1,12 +1,34 @@
 import { LockOutlined } from '@mui/icons-material';
 import { Avatar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
+import { unwrapResult } from '@reduxjs/toolkit';
+import { useAppDispatch } from 'app/hooks';
 import { RegisterPayload } from 'models';
+import { toast } from 'react-toastify';
+import { register } from '../authSlice';
 import RegisterForm from './RegisterForm';
 
-function Register() {
-  const handleSubmit = (values: RegisterPayload) => {
-    console.log(values);
+export interface RegisterProps {
+  onCloseDialog?: () => void;
+}
+
+function Register({ onCloseDialog }: RegisterProps) {
+  const dispatch = useAppDispatch();
+
+  const handleSubmit = async (values: RegisterPayload) => {
+    try {
+      const action = register(values);
+      const resultAction = await dispatch(action);
+      unwrapResult(resultAction);
+
+      if (onCloseDialog) {
+        onCloseDialog();
+      }
+
+      toast.success('Register successfully', { icon: '🎉' });
+    } catch (err) {
+      toast.error('Failed to register');
+    }
   };
 
   return (

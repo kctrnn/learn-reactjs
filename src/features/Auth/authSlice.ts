@@ -9,11 +9,10 @@ export interface AuthState {
 }
 
 export const login = createAsyncThunk('auth/login', async (payload: LoginPayload) => {
-  const { accessToken, expiredAt } = await userApi.login(payload);
+  const { accessToken } = await userApi.login(payload);
 
   //   save token to local storage
   localStorage.setItem(StorageKeys.TOKEN, accessToken);
-  localStorage.setItem(StorageKeys.EXPIRED, expiredAt.toString());
 
   const user = await userApi.getMe();
   localStorage.setItem(StorageKeys.USER, JSON.stringify(user));
@@ -21,11 +20,10 @@ export const login = createAsyncThunk('auth/login', async (payload: LoginPayload
 });
 
 export const register = createAsyncThunk('auth/register', async (payload: RegisterPayload) => {
-  const { accessToken, expiredAt } = await userApi.register(payload);
+  const { accessToken } = await userApi.register(payload);
 
   //   save token to local storage
   localStorage.setItem(StorageKeys.TOKEN, accessToken);
-  localStorage.setItem(StorageKeys.EXPIRED, expiredAt.toString());
 
   const user = await userApi.getMe();
   localStorage.setItem(StorageKeys.USER, JSON.stringify(user));

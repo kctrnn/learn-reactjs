@@ -22,12 +22,6 @@ const LinkStyled = styled(Link)(() => ({
   color: '#fff',
 }));
 
-const BadgeStyled = styled(Badge)(({ theme }) => ({
-  '& .MuiBadge-badge': {
-    transform: 'translate(100%, -50%)',
-  },
-}));
-
 const MODE = {
   LOGIN: 'login',
   REGISTER: 'register',
@@ -61,6 +55,11 @@ function Header() {
     setOpen(false);
   };
 
+  const handleLogout = () => {
+    setAnchorEl(null);
+    dispatch(logout());
+  };
+
   return (
     <Box>
       <AppBar position="static" sx={{ px: 1 }}>
@@ -83,9 +82,9 @@ function Header() {
 
           <LinkStyled to="/favorites">
             <Button color="inherit">
-              <BadgeStyled badgeContent={favoriteLength} color="warning">
+              <Badge badgeContent={favoriteLength} color="warning">
                 My Favorites
-              </BadgeStyled>
+              </Badge>
             </Button>
           </LinkStyled>
 
@@ -118,12 +117,16 @@ function Header() {
         }}
       >
         <MenuItem>{`Hi ${currentUser.username} 👋`}</MenuItem>
-        <MenuItem onClick={() => dispatch(logout())}>Logout</MenuItem>
+        <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
 
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
-          {mode === MODE.LOGIN ? <Login onCloseDialog={handleClose} /> : <Register />}
+          {mode === MODE.LOGIN ? (
+            <Login onCloseDialog={handleClose} />
+          ) : (
+            <Register onCloseDialog={handleClose} />
+          )}
         </DialogContent>
 
         <DialogActions sx={{ justifyContent: 'center' }}>
