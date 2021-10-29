@@ -4,6 +4,7 @@ import { Box } from '@mui/system';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { useAppDispatch } from 'app/hooks';
 import { RegisterPayload } from 'models';
+import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { register } from '../authSlice';
 import RegisterForm from './RegisterForm';
@@ -14,6 +15,7 @@ export interface RegisterProps {
 
 function Register({ onCloseDialog }: RegisterProps) {
   const dispatch = useAppDispatch();
+  const history = useHistory();
 
   const handleSubmit = async (values: RegisterPayload) => {
     try {
@@ -26,6 +28,7 @@ function Register({ onCloseDialog }: RegisterProps) {
       }
 
       toast.success('Register successfully', { icon: '🎉' });
+      history.push('/meetups');
     } catch (err) {
       toast.error('Failed to register');
     }

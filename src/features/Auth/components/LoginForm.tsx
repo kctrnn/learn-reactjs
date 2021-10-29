@@ -41,7 +41,7 @@ function LoginForm({ onSubmit }: LoginFormProps) {
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
-      <InputField name="username" control={control} label="Username" />
+      <InputField name="username" control={control} label="Username" placeholder="kctrnn" />
       <PasswordField name="password" control={control} label="Password" />
 
       <Button

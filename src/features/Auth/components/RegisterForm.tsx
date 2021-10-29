@@ -63,11 +63,11 @@ function RegisterForm({ onSubmit }: RegisterFormProps) {
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
-      <InputField name="username" control={control} label="Username" />
+      <InputField name="username" control={control} label="Username" placeholder="kctrnn" />
 
       <Flex>
-        <InputField name="email" control={control} label="Email" />
-        <InputField name="name" control={control} label="Full name" />
+        <InputField name="email" control={control} label="Email" placeholder="kctrnn@gmail.com" />
+        <InputField name="name" control={control} label="Full name" placeholder="Kim Chan" />
       </Flex>
 
       <PasswordField name="password" control={control} label="Password" />

@@ -16,7 +16,8 @@ import Login from 'features/Auth/components/Login';
 import Register from 'features/Auth/components/Register';
 import { selectFavoriteList } from 'features/Favorite/favoriteSlice';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const LinkStyled = styled(Link)(() => ({
   color: '#fff',
@@ -29,6 +30,7 @@ const MODE = {
 
 function Header() {
   const dispatch = useAppDispatch();
+  const history = useHistory();
 
   const currentUser = useAppSelector(selectCurrentUser);
   const favoriteList = useAppSelector(selectFavoriteList);
@@ -58,6 +60,9 @@ function Header() {
   const handleLogout = () => {
     setAnchorEl(null);
     dispatch(logout());
+
+    toast.info('Logout successfully', { icon: '😢' });
+    history.push('/');
   };
 
   return (

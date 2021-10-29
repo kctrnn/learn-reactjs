@@ -4,6 +4,7 @@ import { Box } from '@mui/system';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { useAppDispatch } from 'app/hooks';
 import { LoginPayload } from 'models';
+import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { login } from '../authSlice';
 import LoginForm from './LoginForm';
@@ -14,6 +15,7 @@ export interface LoginProps {
 
 function Login({ onCloseDialog }: LoginProps) {
   const dispatch = useAppDispatch();
+  const history = useHistory();
 
   const handleSubmit = async (values: LoginPayload) => {
     try {
@@ -26,6 +28,7 @@ function Login({ onCloseDialog }: LoginProps) {
       }
 
       toast.success('Login successfully', { icon: '🎉' });
+      history.push('/meetups');
     } catch (err) {
       toast.error('Failed to login');
     }

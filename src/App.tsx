@@ -1,5 +1,6 @@
 import Header from 'components/Header';
 import NotFound from 'components/NotFound';
+import PrivateRoute from 'components/PrivateRoute';
 import FavoriteFeature from 'features/Favorite';
 import MeetupFeature from 'features/Meetup';
 import TodoFeature from 'features/Todo';
@@ -11,15 +12,15 @@ function App() {
       <Header />
 
       <Switch>
-        <Redirect exact from="/" to="/meetups" />
+        <Redirect exact from="/" to="/todos" />
 
         <Route path="/todos">
           <TodoFeature />
         </Route>
 
-        <Route path="/meetups">
+        <PrivateRoute path="/meetups">
           <MeetupFeature />
-        </Route>
+        </PrivateRoute>
 
         <Route path="/favorites">
           <FavoriteFeature />
