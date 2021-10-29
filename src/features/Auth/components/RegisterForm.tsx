@@ -79,6 +79,7 @@ function RegisterForm({ onSubmit }: RegisterFormProps) {
         color="primary"
         fullWidth
         size="large"
+        sx={{ mt: 2 }}
       >
         Register
       </Button>

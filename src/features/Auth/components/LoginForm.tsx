@@ -51,6 +51,7 @@ function LoginForm({ onSubmit }: LoginFormProps) {
         color="primary"
         fullWidth
         size="large"
+        sx={{ mt: 2 }}
       >
         Sign in
       </Button>
