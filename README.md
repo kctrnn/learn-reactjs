@@ -1,5 +1,7 @@
 # Learn ReactJS 🎉
 
+> Every theory ever: [theory.md](theory.md)
+
 ## Folder structure
 
 ```
@@ -17,79 +19,6 @@ src
 |
 |__ App.tsx
 ```
-
----
-
-### 1. What is `useCallBack()`
-
-Là một react hooks giúp mình tạo ra một `memoized callback` và chỉ tạo ra callback mới khi
-`dependencies thay đổi`
-
-- Nhận vào 2 tham số: 1 là `function`, 2 là `dependencies`
-- Return `memoized callback`
-- Chỉ tạo ra function mới khi dependencies thay đổi
-- Nếu dùng empty dependencies thì không bao giờ tạo ra function mới
-
-```js
-// App re-render --> create a new function --> Chart is re-rendered
-function App() {
-  const handleChartTypeChange = (type) => {};
-  return <Chart onTypeChange={handleChartTypeChange} />;
-}
-```
-
-```js
-// useCallBack makes the function is created only once
-// App re-render --> Chart IS NOT re-rendered
-function App() {
-  const handleChartTypeChange = useCallback((type) => {}, []);
-  return <Chart onTypeChange={handleChartTypeChange} />;
-}
-```
-
-### 2. What is `useMemo()`
-
-Là một react hooks giúp mình tạo ra một `memoized value` và chỉ tính toán ra value mới khi
-`dependencies thay đổi`
-
-- Nhận vào 2 tham số: 1 là `function`, 2 là `dependencies`
-- Return `memoized value`
-- Chỉ tính toán value mới khi dependencies thay đổi
-- Nếu dùng empty dependencies thì không bao giờ tính toán lại value mới
-
-```js
-// App re-render --> create a new array --> Chart is re-rendered
-function App() {
-  const data = [{}, {}, {}];
-  return <Chart data={data} />;
-}
-```
-
-```js
-// useMemo makes the array is created only once
-// App re-render --> Chart IS NOT re-rendered
-function App() {
-  const data = useMemo(() => [{}, {}, {}], []);
-  return <Chart data={data} />;
-}
-```
-
-### 3. Higher order component `React.memo()`
-
-- React.memo() tương tự như PureComponent
-- React.memo() dùng cho functional component, còn PureComponent dùng cho class component
-- Chỉ render lại component nếu props thay đổi
-- Sử dụng shallow comparison (so sánh nông)
-
-```js
-function Chart() {
-  return <div>Yup!</div>;
-}
-
-export default React.memo(Chart);
-```
-
----
 
 ## 📰 Form module
 
