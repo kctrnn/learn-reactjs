@@ -1,7 +1,5 @@
 # Learn ReactJS 🎉
 
-> Every theory ever: [theory.md](theory.md)
-
 ## Folder structure
 
 ```
@@ -86,3 +84,9 @@ src
 - Form management: `react-hook-form`
 - Form validation: `yup`
 - HTTP client: `axios`
+
+---
+
+- Every theory ever: [theory.md](theory.md)
+- [Learn NextJS](https://github.com/kimchantr/learn-nextjs)
+- [Practice section 8](https://codesandbox.io/s/practice-s8-huqrw)

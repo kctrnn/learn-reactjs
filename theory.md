@@ -32,6 +32,7 @@ UNMOUNTING
 ```js
 function App() {
   const [filters, setFilters] = useState();
+
   // No dependencies defined
   useEffect(() => {
     // EVERY
