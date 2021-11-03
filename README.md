@@ -1,9 +1,10 @@
 # Learn ReactJS 🎉
 
 - Every theory ever: [theory.md](theory.md)
-- [Learn nextjs](https://github.com/kimchantr/learn-nextjs)
-- [Practice section 8](https://codesandbox.io/s/practice-s8-huqrw)
+- [Learn Nextjs](https://github.com/kimchantr/learn-nextjs)
+- [Practice section 8](https://codesandbox.io/s/practice-section-08-41yo0)
 - [Practice react animation](https://codesandbox.io/s/practice-react-animation-8w013)
+- [Practice context API](https://codesandbox.io/s/practice-context-api-4h1k2)
 
 ---
 
