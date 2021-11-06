@@ -3,6 +3,7 @@ import NotFound from 'components/NotFound';
 import PrivateRoute from 'components/PrivateRoute';
 import FavoriteFeature from 'features/Favorite';
 import MeetupFeature from 'features/Meetup';
+import ProductFeature from 'features/Product';
 import TodoFeature from 'features/Todo';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
@@ -24,6 +25,10 @@ function App() {
 
         <Route path="/favorites">
           <FavoriteFeature />
+        </Route>
+
+        <Route path="/products">
+          <ProductFeature />
         </Route>
 
         <Route>
