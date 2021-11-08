@@ -1,8 +1,8 @@
-import { Product, QueryParams } from 'models';
+import { ListResponse, Product, QueryParams } from 'models';
 import axiosClient from './axiosClient';
 
 export const productApi = {
-  getAll(params: QueryParams): Promise<Product[]> {
+  getAll(params: Partial<QueryParams>): Promise<ListResponse<Product>> {
     const url = '/products';
     return axiosClient.get(url, { params });
   },

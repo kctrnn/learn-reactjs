@@ -1,9 +1,19 @@
 import { Typography } from '@mui/material';
-import { Box } from '@mui/system';
+import { Box, styled } from '@mui/system';
 import { STATIC_HOST, THUMBNAIL_PLACEHOLDER } from 'constants/index';
 import { Product as ProductModel } from 'models';
 import { useHistory } from 'react-router-dom';
 import { formatPrice } from 'utils';
+
+const Thumbnail = styled(Box)(() => ({
+  minHeight: 200,
+
+  img: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+  },
+}));
 
 export interface ProductProps {
   product: ProductModel;
@@ -20,15 +30,15 @@ function Product({ product }: ProductProps) {
   };
 
   return (
-    <Box padding={1} onClick={handleClick}>
-      <Box padding={1} minHeight="215px">
-        <img src={thumbnailUrl} alt={product.name} width="100%" />
-      </Box>
+    <Box padding={2} onClick={handleClick}>
+      <Thumbnail>
+        <img src={thumbnailUrl} alt={product.name} />
+      </Thumbnail>
 
       <Typography variant="body2">{product.name}</Typography>
 
       <Typography variant="body2">
-        <Box component="span" fontSize="1rem" fontWeight="bold" mr={1}>
+        <Box component="span" fontSize="1rem" fontWeight="bold" mr={2}>
           {formatPrice(product.salePrice)}
         </Box>
 
