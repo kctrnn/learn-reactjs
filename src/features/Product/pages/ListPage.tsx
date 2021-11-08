@@ -4,6 +4,7 @@ import { Box, styled } from '@mui/system';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { ChangeEvent, useEffect } from 'react';
 import ProductList from '../components/ProductList';
+import ProductSkeletonList from '../components/ProductSkeletonList';
 import {
   fetchProductList,
   selectProductFilter,
@@ -52,7 +53,11 @@ function ListPage() {
 
           <Grid item flex={1}>
             <Paper elevation={0}>
-              <ProductList productList={productList} />
+              {loading ? (
+                <ProductSkeletonList length={10} />
+              ) : (
+                <ProductList productList={productList} />
+              )}
 
               <PaginationStyled
                 shape="rounded"
