@@ -9,11 +9,14 @@ export interface Product {
   originalPrice: number;
   salePrice: number;
 
+  isFreeShip: boolean;
   isPromotion: 0 | 1;
   promotionPercent: number;
 
   images: string[];
-  isFreeShip: boolean;
+  thumbnail: {
+    url: string;
+  };
 
   createdAt?: number;
   updatedAt?: number;

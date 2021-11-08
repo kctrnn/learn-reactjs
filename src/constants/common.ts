@@ -1,5 +1,8 @@
 import { Meetup, Todo } from 'models';
 
+export const STATIC_HOST = 'https://json-server-kctrnn.herokuapp.com';
+export const THUMBNAIL_PLACEHOLDER = 'https://via.placeholder.com/444';
+
 export const TODO_LIST: Todo[] = [
   {
     id: 1,
