@@ -1,29 +1,19 @@
 import { Container, Grid, Paper } from '@mui/material';
 import { Box } from '@mui/system';
-import { productApi } from 'api/productApi';
-import { Product } from 'models';
-import { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { useEffect } from 'react';
 import ProductList from '../components/ProductList';
+import { fetchProductList, selectProductFilter, selectProductList } from '../productSlice';
 
 function ListPage() {
-  const [productList, setProductList] = useState<Product[]>([]);
+  const dispatch = useAppDispatch();
+
+  const productList = useAppSelector(selectProductList);
+  const filter = useAppSelector(selectProductFilter);
 
   useEffect(() => {
-    const fetchProductList = async () => {
-      try {
-        const { data } = await productApi.getAll({
-          _page: 1,
-          _limit: 10,
-        });
-
-        setProductList(data);
-      } catch (error) {
-        console.log('Fetch product list failed', error);
-      }
-    };
-
-    fetchProductList();
-  }, []);
+    dispatch(fetchProductList(filter));
+  }, [filter, dispatch]);
 
   return (
     <Box>
