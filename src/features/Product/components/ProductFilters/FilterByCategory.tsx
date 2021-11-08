@@ -50,11 +50,11 @@ export function FilterByCategory({ onChange, filter }: FilterByCategoryProps) {
       {loading &&
         Array.from(new Array(6)).map((x, idx) => (
           <Box key={idx} sx={{ pt: 1, span: { borderRadius: 1 } }}>
-            <Skeleton variant="rectangular" height={40} width="100%" />
+            <Skeleton variant="rectangular" height={30} width="100%" />
           </Box>
         ))}
 
-      <List disablePadding>
+      <List disablePadding dense>
         {categoryList.length > 0 &&
           categoryList.map((category) => (
             <ListItem

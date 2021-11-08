@@ -1,5 +1,4 @@
-import { Divider } from '@mui/material';
-import { Box } from '@mui/system';
+import { Paper, Stack } from '@mui/material';
 import { QueryParams } from 'models';
 import { FilterByCategory } from './FilterByCategory';
 import { FilterByPrice } from './FilterByPrice';
@@ -17,15 +16,19 @@ function ProductFilters({ filter, onFilterChange }: ProductFiltersProps) {
   };
 
   return (
-    <Box>
-      <FilterByCategory filter={filter} onChange={handleChange} />
-      <Divider />
+    <Stack spacing={2}>
+      <Paper elevation={0}>
+        <FilterByCategory filter={filter} onChange={handleChange} />
+      </Paper>
 
-      <FilterByPrice onChange={handleChange} />
-      <Divider />
+      <Paper elevation={0}>
+        <FilterByPrice onChange={handleChange} />
+      </Paper>
 
-      <FilterByService filter={filter} onChange={handleChange} />
-    </Box>
+      <Paper elevation={0}>
+        <FilterByService filter={filter} onChange={handleChange} />
+      </Paper>
+    </Stack>
   );
 }
 

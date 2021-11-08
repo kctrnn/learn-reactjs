@@ -7,6 +7,7 @@ import { ChangeEvent, useEffect } from 'react';
 import ProductFilters from '../components/ProductFilters';
 import ProductList from '../components/ProductList';
 import ProductSkeletonList from '../components/ProductSkeletonList';
+import ProductSort from '../components/ProductSort';
 import {
   fetchProductList,
   selectProductFilter,
@@ -36,6 +37,7 @@ function ListPage() {
     dispatch(fetchProductList(filter));
   }, [filter, dispatch]);
 
+  // pagination
   const handlePageChange = (event: ChangeEvent<unknown>, page: number) => {
     const newFilter = {
       ...filter,
@@ -45,6 +47,7 @@ function ListPage() {
     dispatch(setFilter(newFilter));
   };
 
+  // filter
   const handleFilterChange = (newFilter: Partial<QueryParams>) => {
     dispatch(
       setFilter({
@@ -54,18 +57,35 @@ function ListPage() {
     );
   };
 
+  // sort
+  const handleSortChange = (newSortValue: string) => {
+    // salePrice:desc -> sortBy: salePrice, orderBy: desc
+    const [sortBy, orderBy] = newSortValue.split(':');
+
+    dispatch(
+      setFilter({
+        ...filter,
+        _sort: sortBy,
+        _order: orderBy as 'asc' | 'desc',
+      })
+    );
+  };
+
   return (
     <Box>
       <Container>
         <Grid container spacing={2}>
           <Grid item width={250}>
-            <Paper elevation={0}>
-              <ProductFilters filter={filter} onFilterChange={handleFilterChange} />
-            </Paper>
+            <ProductFilters filter={filter} onFilterChange={handleFilterChange} />
           </Grid>
 
           <Grid item flex={1}>
             <Paper elevation={0}>
+              <ProductSort
+                currentSort={`${filter._sort}:${filter._order}`}
+                onChange={handleSortChange}
+              />
+
               {loading ? (
                 <ProductSkeletonList length={10} />
               ) : (
