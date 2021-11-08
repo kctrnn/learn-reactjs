@@ -2,7 +2,9 @@ import { Container, Grid, Paper } from '@mui/material';
 import Pagination from '@mui/material/Pagination';
 import { Box, styled } from '@mui/system';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { QueryParams } from 'models';
 import { ChangeEvent, useEffect } from 'react';
+import ProductFilters from '../components/ProductFilters';
 import ProductList from '../components/ProductList';
 import ProductSkeletonList from '../components/ProductSkeletonList';
 import {
@@ -43,12 +45,18 @@ function ListPage() {
     dispatch(setFilter(newFilter));
   };
 
+  const handleFilterChange = (newFilter: Partial<QueryParams>) => {
+    dispatch(setFilter(newFilter));
+  };
+
   return (
     <Box>
       <Container>
         <Grid container spacing={2}>
           <Grid item width={250}>
-            <Paper elevation={0}>FILTERS</Paper>
+            <Paper elevation={0}>
+              <ProductFilters filter={filter} onFilterChange={handleFilterChange} />
+            </Paper>
           </Grid>
 
           <Grid item flex={1}>

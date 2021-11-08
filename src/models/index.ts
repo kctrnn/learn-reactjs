@@ -3,3 +3,4 @@ export * from './todo';
 export * from './meetup';
 export * from './user';
 export * from './product';
+export * from './category';
