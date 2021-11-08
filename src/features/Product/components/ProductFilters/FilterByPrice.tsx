@@ -3,8 +3,6 @@ import { Box } from '@mui/system';
 import { InputField } from 'components/FormFields';
 import { QueryParams } from 'models';
 import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
 
 export interface FilterByPriceProps {
   onChange?: (newFilter: Partial<QueryParams>) => void;

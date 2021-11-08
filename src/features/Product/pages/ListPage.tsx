@@ -21,7 +21,7 @@ const PaginationStyled = styled(Pagination)(({ theme }) => ({
   justifyContent: 'center',
 
   marginTop: theme.spacing(4),
-  paddingBottom: theme.spacing(2),
+  paddingBottom: theme.spacing(4),
 }));
 
 function ListPage() {

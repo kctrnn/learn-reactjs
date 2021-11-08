@@ -24,7 +24,7 @@ function ProductFilters({ filter, onFilterChange }: ProductFiltersProps) {
       <FilterByPrice onChange={handleChange} />
       <Divider />
 
-      <FilterByService onChange={handleChange} />
+      <FilterByService filter={filter} onChange={handleChange} />
     </Box>
   );
 }
