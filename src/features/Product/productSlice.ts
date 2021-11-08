@@ -17,6 +17,8 @@ const initialState: ProductState = {
   filter: {
     _page: 1,
     _limit: 10,
+    _order: 'asc',
+    _sort: 'salePrice',
   },
 
   pagination: {

@@ -34,8 +34,8 @@ export function FilterByCategory({ onChange, filter }: FilterByCategoryProps) {
     if (!onChange) return;
 
     const newFilter = {
-      ...filter,
       categoryId,
+      _page: 1,
     };
 
     onChange(newFilter);
@@ -43,8 +43,8 @@ export function FilterByCategory({ onChange, filter }: FilterByCategoryProps) {
 
   return (
     <Box p={2}>
-      <Typography fontSize={14} fontWeight={600} sx={{ mb: 1, textTransform: 'uppercase' }}>
-        Danh mục sản phẩm
+      <Typography fontSize={14} fontWeight={500} sx={{ mb: 1 }}>
+        DANH MỤC SẢN PHẨM
       </Typography>
 
       {loading &&

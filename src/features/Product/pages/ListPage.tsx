@@ -46,7 +46,12 @@ function ListPage() {
   };
 
   const handleFilterChange = (newFilter: Partial<QueryParams>) => {
-    dispatch(setFilter(newFilter));
+    dispatch(
+      setFilter({
+        ...filter,
+        ...newFilter,
+      })
+    );
   };
 
   return (

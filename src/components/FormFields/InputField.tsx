@@ -7,9 +7,16 @@ export interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   control: Control<any>;
 
   label?: string;
+  isSmall?: boolean;
 }
 
-export function InputField({ name, control, label, ...inputProps }: InputFieldProps) {
+export function InputField({
+  name,
+  control,
+  label,
+  isSmall = false,
+  ...inputProps
+}: InputFieldProps) {
   const {
     field: { ref, ...rest },
     fieldState: { invalid, error },
@@ -24,11 +31,12 @@ export function InputField({ name, control, label, ...inputProps }: InputFieldPr
     <TextField
       {...rest}
       inputRef={ref}
-      margin="normal"
+      margin={isSmall ? 'dense' : 'normal'}
       variant="outlined"
       autoComplete="off"
       fullWidth
       label={label}
+      size={isSmall ? 'small' : 'medium'}
       error={invalid}
       helperText={error?.message}
       inputProps={inputProps}
