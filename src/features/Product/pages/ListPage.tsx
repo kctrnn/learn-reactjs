@@ -1,19 +1,46 @@
 import { Container, Grid, Paper } from '@mui/material';
-import { Box } from '@mui/system';
+import Pagination from '@mui/material/Pagination';
+import { Box, styled } from '@mui/system';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { useEffect } from 'react';
+import { ChangeEvent, useEffect } from 'react';
 import ProductList from '../components/ProductList';
-import { fetchProductList, selectProductFilter, selectProductList } from '../productSlice';
+import {
+  fetchProductList,
+  selectProductFilter,
+  selectProductList,
+  selectProductLoading,
+  selectProductPagination,
+  setFilter,
+} from '../productSlice';
+
+const PaginationStyled = styled(Pagination)(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'center',
+
+  marginTop: theme.spacing(4),
+  paddingBottom: theme.spacing(2),
+}));
 
 function ListPage() {
   const dispatch = useAppDispatch();
 
   const productList = useAppSelector(selectProductList);
+  const loading = useAppSelector(selectProductLoading);
   const filter = useAppSelector(selectProductFilter);
+  const pagination = useAppSelector(selectProductPagination);
 
   useEffect(() => {
     dispatch(fetchProductList(filter));
   }, [filter, dispatch]);
+
+  const handlePageChange = (event: ChangeEvent<unknown>, page: number) => {
+    const newFilter = {
+      ...filter,
+      _page: page,
+    };
+
+    dispatch(setFilter(newFilter));
+  };
 
   return (
     <Box>
@@ -26,6 +53,15 @@ function ListPage() {
           <Grid item flex={1}>
             <Paper elevation={0}>
               <ProductList productList={productList} />
+
+              <PaginationStyled
+                shape="rounded"
+                variant="outlined"
+                color="primary"
+                count={Math.ceil(pagination._totalRows / pagination._limit)}
+                page={pagination._page}
+                onChange={handlePageChange}
+              />
             </Paper>
           </Grid>
         </Grid>

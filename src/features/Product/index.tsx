@@ -7,7 +7,7 @@ function ProductFeature() {
   const match = useRouteMatch();
 
   return (
-    <Box pt={4} bgcolor="#f4f4f4">
+    <Box py={4} bgcolor="#f4f4f4">
       <Switch>
         <Route exact path={match.url}>
           <ListPage />
