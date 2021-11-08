@@ -1,5 +1,7 @@
 import { AccountCircle } from '@mui/icons-material';
 import MenuIcon from '@mui/icons-material/Menu';
+import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
+import StarsRoundedIcon from '@mui/icons-material/StarsRounded';
 import { Dialog, DialogActions, DialogContent, Menu, MenuItem } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Badge from '@mui/material/Badge';
@@ -16,7 +18,7 @@ import Login from 'features/Auth/components/Login';
 import Register from 'features/Auth/components/Register';
 import { selectFavoriteList } from 'features/Favorite/favoriteSlice';
 import { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const LinkStyled = styled(Link)(() => ({
@@ -31,11 +33,15 @@ const MODE = {
 function Header() {
   const dispatch = useAppDispatch();
   const history = useHistory();
+  const { pathname } = useLocation();
 
   const currentUser = useAppSelector(selectCurrentUser);
   const favoriteList = useAppSelector(selectFavoriteList);
   const favoriteLength = favoriteList.length;
   const isLoggedIn = Boolean(localStorage.getItem(StorageKeys.TOKEN));
+
+  const isMeetupMode = pathname === '/meetups' || pathname === '/favorites';
+  const isShoppingCartMode = pathname === '/products' || pathname === '/cart';
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
@@ -77,6 +83,10 @@ function Header() {
             <LinkStyled to="/">24H DEV</LinkStyled>
           </Typography>
 
+          <LinkStyled to="/products">
+            <Button color="inherit">🚀 Shopping cart</Button>
+          </LinkStyled>
+
           <LinkStyled to="/todos">
             <Button color="inherit">Todos</Button>
           </LinkStyled>
@@ -85,13 +95,25 @@ function Header() {
             <Button color="inherit">Meetups</Button>
           </LinkStyled>
 
-          <LinkStyled to="/favorites">
-            <Button color="inherit">
-              <Badge badgeContent={favoriteLength} color="warning">
-                My Favorites
-              </Badge>
-            </Button>
-          </LinkStyled>
+          {isMeetupMode && (
+            <LinkStyled to="/favorites">
+              <IconButton color="inherit">
+                <Badge badgeContent={favoriteLength} color="error">
+                  <StarsRoundedIcon color="inherit" />
+                </Badge>
+              </IconButton>
+            </LinkStyled>
+          )}
+
+          {isShoppingCartMode && (
+            <LinkStyled to="/cart">
+              <IconButton color="inherit">
+                <Badge badgeContent={5} color="warning">
+                  <ShoppingCartRoundedIcon color="inherit" />
+                </Badge>
+              </IconButton>
+            </LinkStyled>
+          )}
 
           {!isLoggedIn && (
             <Button color="inherit" onClick={handleLoginClick}>

@@ -1,6 +1,7 @@
 import Header from 'components/Header';
 import NotFound from 'components/NotFound';
 import PrivateRoute from 'components/PrivateRoute';
+import CartFeature from 'features/Cart';
 import FavoriteFeature from 'features/Favorite';
 import MeetupFeature from 'features/Meetup';
 import ProductFeature from 'features/Product';
@@ -29,6 +30,10 @@ function App() {
 
         <Route path="/products">
           <ProductFeature />
+        </Route>
+
+        <Route path="/cart">
+          <CartFeature />
         </Route>
 
         <Route>

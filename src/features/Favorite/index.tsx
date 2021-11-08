@@ -6,7 +6,9 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { Box } from '@mui/system';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { Link } from 'react-router-dom';
 import { removeToFavorite, selectFavoriteList } from './favoriteSlice';
 
 function FavoriteFeature() {
@@ -20,7 +22,15 @@ function FavoriteFeature() {
   return (
     <Container maxWidth="md" sx={{ pt: 4 }}>
       {favoriteList.length === 0 && (
-        <Typography align="center">You got no favorites yet. Start adding some?</Typography>
+        <Box textAlign="center">
+          <Typography mb={2}>You got no favorites yet. Start adding some?</Typography>
+
+          <Link to="/meetups">
+            <Button variant="contained" size="small">
+              All meetups
+            </Button>
+          </Link>
+        </Box>
       )}
 
       {favoriteList.length > 0 && (
