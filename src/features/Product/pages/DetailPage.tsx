@@ -1,6 +1,7 @@
 import { CircularProgress, Container, Grid, Paper } from '@mui/material';
 import { Box, styled } from '@mui/system';
 import { useParams } from 'react-router-dom';
+import AddToCartForm, { AddToCartFormValues } from '../components/AddToCartForm';
 import ProductInfo from '../components/ProductInfo';
 import ProductThumbnail from '../components/ProductThumbnail';
 import useProductDetail from '../hooks/useProductDetail';
@@ -36,6 +37,10 @@ function DetailPage() {
     );
   }
 
+  const handleAddToCartFormSubmit = (values: AddToCartFormValues) => {
+    console.log(values);
+  };
+
   return (
     <Box pt={2}>
       <Container>
@@ -47,6 +52,7 @@ function DetailPage() {
 
             <Right item>
               <ProductInfo product={product} />
+              <AddToCartForm onSubmit={handleAddToCartFormSubmit} />
             </Right>
           </Grid>
         </Paper>
