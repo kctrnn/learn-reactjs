@@ -16,12 +16,13 @@ import { StorageKeys } from 'constants/index';
 import { logout, selectCurrentUser } from 'features/Auth/authSlice';
 import Login from 'features/Auth/components/Login';
 import Register from 'features/Auth/components/Register';
+import { selectCartItems } from 'features/Cart/cartSlice';
 import { selectFavoriteList } from 'features/Favorite/favoriteSlice';
 import { useState } from 'react';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-const LinkStyled = styled(Link)(() => ({
+const LinkStyled = styled(NavLink)(({ theme }) => ({
   color: '#fff',
 }));
 
@@ -37,11 +38,14 @@ function Header() {
 
   const currentUser = useAppSelector(selectCurrentUser);
   const favoriteList = useAppSelector(selectFavoriteList);
+  const cartItems = useAppSelector(selectCartItems);
+
   const favoriteLength = favoriteList.length;
+  const totalCartItem = cartItems.length;
   const isLoggedIn = Boolean(localStorage.getItem(StorageKeys.TOKEN));
 
-  const isMeetupMode = pathname === '/meetups' || pathname === '/favorites';
-  const isShoppingCartMode = pathname === '/products' || pathname === '/cart';
+  const isMeetupMode = pathname.includes('/meetups') || pathname === '/favorites';
+  const isShoppingCartMode = pathname.includes('/products') || pathname === '/cart';
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
@@ -80,11 +84,13 @@ function Header() {
           </IconButton>
 
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <LinkStyled to="/">24H DEV</LinkStyled>
+            <LinkStyled exact to="/">
+              24H DEV
+            </LinkStyled>
           </Typography>
 
           <LinkStyled to="/products">
-            <Button color="inherit">🚀 Shopping cart</Button>
+            <Button color="inherit">🛒 Shopping cart</Button>
           </LinkStyled>
 
           <LinkStyled to="/todos">
@@ -108,7 +114,7 @@ function Header() {
           {isShoppingCartMode && (
             <LinkStyled to="/cart">
               <IconButton color="inherit">
-                <Badge badgeContent={5} color="warning">
+                <Badge badgeContent={totalCartItem} color="warning">
                   <ShoppingCartRoundedIcon color="inherit" />
                 </Badge>
               </IconButton>

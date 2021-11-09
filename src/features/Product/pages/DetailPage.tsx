@@ -5,6 +5,8 @@ import AddToCartForm, { AddToCartFormValues } from '../components/AddToCartForm'
 import ProductInfo from '../components/ProductInfo';
 import ProductThumbnail from '../components/ProductThumbnail';
 import useProductDetail from '../hooks/useProductDetail';
+import { CartItem, addToCart } from 'features/Cart/cartSlice';
+import { useAppDispatch } from 'app/hooks';
 
 const Loading = styled(Box)(() => ({
   height: 'calc(100vh - 4rem)',
@@ -25,6 +27,7 @@ const Right = styled(Grid)(({ theme }) => ({
 }));
 
 function DetailPage() {
+  const dispatch = useAppDispatch();
   const { productId } = useParams<{ productId: string }>();
 
   const { product, loading } = useProductDetail(productId);
@@ -38,7 +41,14 @@ function DetailPage() {
   }
 
   const handleAddToCartFormSubmit = (values: AddToCartFormValues) => {
-    console.log(values);
+    const { quantity } = values;
+    const cartItem: CartItem = {
+      id: productId,
+      product,
+      quantity,
+    };
+
+    dispatch(addToCart(cartItem));
   };
 
   return (

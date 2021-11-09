@@ -14,9 +14,9 @@ export interface Product {
   promotionPercent: number;
 
   images: string[];
-  thumbnail: {
-    url: string;
-  };
+  // thumbnail: {
+  //   url: string;
+  // };
 
   createdAt?: number;
   updatedAt?: number;

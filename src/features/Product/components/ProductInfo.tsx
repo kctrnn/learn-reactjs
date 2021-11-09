@@ -30,7 +30,7 @@ const OriginalPrice = styled(Box)(({ theme }) => ({
 function ProductInfo({ product }: ProductInfoProps) {
   return (
     <Box p={2}>
-      <Typography variant="h5" component="h1">
+      <Typography variant="h5" component="h1" fontWeight={500}>
         {product.name}
       </Typography>
 
