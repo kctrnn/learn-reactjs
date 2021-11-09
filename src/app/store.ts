@@ -1,5 +1,6 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import authReducer from 'features/Auth/authSlice';
+import cartReducer from 'features/Cart/cartSlice';
 import favoriteReducer from 'features/Favorite/favoriteSlice';
 import productReducer from 'features/Product/productSlice';
 import createSagaMiddleware from 'redux-saga';
@@ -12,6 +13,7 @@ export const store = configureStore({
     favorite: favoriteReducer,
     auth: authReducer,
     product: productReducer,
+    cart: cartReducer,
   },
 
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),

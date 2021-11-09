@@ -38,7 +38,7 @@ function AddToCartForm({ onSubmit }: AddToCartFormProps) {
       <form onSubmit={handleSubmit(handleFormSubmit)}>
         <QuantityField control={control} name="quantity" label="Quantity" setValue={setValue} />
 
-        <Button type="submit" variant="contained" fullWidth>
+        <Button type="submit" variant="contained" fullWidth size="large">
           Add to cart
         </Button>
       </form>
