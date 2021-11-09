@@ -72,7 +72,7 @@ function ListPage() {
   };
 
   return (
-    <Box>
+    <Box pt={2}>
       <Container>
         <Grid container spacing={2}>
           <Grid item width={250}>
@@ -85,6 +85,8 @@ function ListPage() {
                 currentSort={`${filter._sort}:${filter._order}`}
                 onChange={handleSortChange}
               />
+
+              {/* Filter viewer */}
 
               {loading ? (
                 <ProductSkeletonList length={10} />
