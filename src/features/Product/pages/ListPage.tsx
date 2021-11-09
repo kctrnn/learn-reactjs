@@ -75,11 +75,11 @@ function ListPage() {
     <Box pt={2}>
       <Container>
         <Grid container spacing={2}>
-          <Grid item width={250}>
+          <Grid item xs={12} sm={4} md={3}>
             <ProductFilters filter={filter} onFilterChange={handleFilterChange} />
           </Grid>
 
-          <Grid item flex={1}>
+          <Grid item xs={12} sm={8} md={9}>
             <Paper elevation={0}>
               <ProductSort
                 currentSort={`${filter._sort}:${filter._order}`}
@@ -88,11 +88,8 @@ function ListPage() {
 
               {/* Filter viewer */}
 
-              {loading ? (
-                <ProductSkeletonList length={10} />
-              ) : (
-                <ProductList productList={productList} />
-              )}
+              {loading && <ProductSkeletonList length={10} />}
+              {!loading && <ProductList productList={productList} />}
 
               <PaginationStyled
                 shape="rounded"

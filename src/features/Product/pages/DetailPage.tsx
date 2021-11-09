@@ -1,12 +1,13 @@
 import { CircularProgress, Container, Grid, Paper } from '@mui/material';
 import { Box, styled } from '@mui/system';
+import { useAppDispatch } from 'app/hooks';
+import { addToCart, CartItem } from 'features/Cart/cartSlice';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import AddToCartForm, { AddToCartFormValues } from '../components/AddToCartForm';
 import ProductInfo from '../components/ProductInfo';
 import ProductThumbnail from '../components/ProductThumbnail';
 import useProductDetail from '../hooks/useProductDetail';
-import { CartItem, addToCart } from 'features/Cart/cartSlice';
-import { useAppDispatch } from 'app/hooks';
 
 const Loading = styled(Box)(() => ({
   height: 'calc(100vh - 4rem)',
@@ -49,6 +50,7 @@ function DetailPage() {
     };
 
     dispatch(addToCart(cartItem));
+    toast.success('Add product to cart successfully', { icon: '🤗' });
   };
 
   return (

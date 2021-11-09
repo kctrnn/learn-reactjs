@@ -1,5 +1,4 @@
 import { AccountCircle } from '@mui/icons-material';
-import MenuIcon from '@mui/icons-material/Menu';
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
 import StarsRoundedIcon from '@mui/icons-material/StarsRounded';
 import { Dialog, DialogActions, DialogContent, Menu, MenuItem } from '@mui/material';
@@ -68,7 +67,7 @@ function Header() {
   };
 
   const handleLogout = () => {
-    setAnchorEl(null);
+    handleCloseMenu();
     dispatch(logout());
 
     toast.info('Logout successfully', { icon: '😢' });
@@ -78,12 +77,12 @@ function Header() {
   return (
     <Box>
       <AppBar position="static" sx={{ px: 1 }}>
-        <Toolbar>
-          <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
-            <MenuIcon />
-          </IconButton>
-
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+        <Toolbar sx={{ justifyContent: { xs: 'center', sm: 'flex-start' } }}>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+          >
             <LinkStyled exact to="/">
               24H DEV
             </LinkStyled>
