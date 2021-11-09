@@ -1,6 +1,8 @@
 import { CircularProgress, Container, Grid, Paper } from '@mui/material';
 import { Box, styled } from '@mui/system';
 import { useParams } from 'react-router-dom';
+import ProductInfo from '../components/ProductInfo';
+import ProductThumbnail from '../components/ProductThumbnail';
 import useProductDetail from '../hooks/useProductDetail';
 
 const Loading = styled(Box)(() => ({
@@ -10,12 +12,23 @@ const Loading = styled(Box)(() => ({
   alignItems: 'center',
 }));
 
+const Left = styled(Grid)(({ theme }) => ({
+  width: 400,
+  borderRight: `1px solid ${theme.palette.divider}`,
+  padding: theme.spacing(2),
+}));
+
+const Right = styled(Grid)(({ theme }) => ({
+  flex: 1,
+  padding: theme.spacing(2),
+}));
+
 function DetailPage() {
   const { productId } = useParams<{ productId: string }>();
 
-  const [product, loading] = useProductDetail(productId);
+  const { product, loading } = useProductDetail(productId);
 
-  if (!loading) {
+  if (loading) {
     return (
       <Loading>
         <CircularProgress />
@@ -24,17 +37,17 @@ function DetailPage() {
   }
 
   return (
-    <Box>
+    <Box pt={2}>
       <Container>
-        <Paper>
+        <Paper elevation={0}>
           <Grid container>
-            <Grid item width={400}>
-              Thumbnail
-            </Grid>
+            <Left item>
+              <ProductThumbnail product={product} />
+            </Left>
 
-            <Grid item flex={1}>
-              Product info
-            </Grid>
+            <Right item>
+              <ProductInfo product={product} />
+            </Right>
           </Grid>
         </Paper>
       </Container>

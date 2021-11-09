@@ -3,7 +3,7 @@ import { Product } from 'models';
 import { useEffect, useState } from 'react';
 
 function useProductDetail(productId: string) {
-  const [product, setProduct] = useState<Product>();
+  const [product, setProduct] = useState<Product>({} as Product);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ function useProductDetail(productId: string) {
     })();
   }, [productId]);
 
-  return [product, loading];
+  return { product, loading };
 }
 
 export default useProductDetail;
