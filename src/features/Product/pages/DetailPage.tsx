@@ -2,10 +2,14 @@ import { CircularProgress, Container, Grid, Paper } from '@mui/material';
 import { Box, styled } from '@mui/system';
 import { useAppDispatch } from 'app/hooks';
 import { addToCart, CartItem } from 'features/Cart/cartSlice';
-import { useParams } from 'react-router-dom';
+import { Route, Switch, useParams, useRouteMatch } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import AddToCartForm, { AddToCartFormValues } from '../components/AddToCartForm';
+import ProductAdditional from '../components/ProductAdditional';
+import ProductDescription from '../components/ProductDescription';
 import ProductInfo from '../components/ProductInfo';
+import ProductMenu from '../components/ProductMenu';
+import ProductReview from '../components/ProductReview';
 import ProductThumbnail from '../components/ProductThumbnail';
 import useProductDetail from '../hooks/useProductDetail';
 
@@ -30,6 +34,7 @@ const Right = styled(Grid)(({ theme }) => ({
 function DetailPage() {
   const dispatch = useAppDispatch();
   const { productId } = useParams<{ productId: string }>();
+  const { url } = useRouteMatch();
 
   const { product, loading } = useProductDetail(productId);
 
@@ -54,7 +59,7 @@ function DetailPage() {
   };
 
   return (
-    <Box pt={2}>
+    <Box py={4}>
       <Container>
         <Paper elevation={0}>
           <Grid container>
@@ -67,6 +72,24 @@ function DetailPage() {
               <AddToCartForm onSubmit={handleAddToCartFormSubmit} />
             </Right>
           </Grid>
+        </Paper>
+
+        <ProductMenu />
+
+        <Paper elevation={0} sx={{ p: 2, minHeight: 350 }}>
+          <Switch>
+            <Route exact path={url}>
+              <ProductDescription product={product} />
+            </Route>
+
+            <Route path={`${url}/additional`}>
+              <ProductAdditional />
+            </Route>
+
+            <Route path={`${url}/reviews`}>
+              <ProductReview />
+            </Route>
+          </Switch>
         </Paper>
       </Container>
     </Box>
