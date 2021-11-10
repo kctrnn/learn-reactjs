@@ -4,6 +4,7 @@ import { Box, styled } from '@mui/system';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { QueryParams } from 'models';
 import { ChangeEvent, useEffect } from 'react';
+import FilterViewer from '../components/FilterViewer';
 import ProductFilters from '../components/ProductFilters';
 import ProductList from '../components/ProductList';
 import ProductSkeletonList from '../components/ProductSkeletonList';
@@ -37,7 +38,6 @@ function ListPage() {
     dispatch(fetchProductList(filter));
   }, [filter, dispatch]);
 
-  // pagination
   const handlePageChange = (event: ChangeEvent<unknown>, page: number) => {
     const newFilter = {
       ...filter,
@@ -47,7 +47,6 @@ function ListPage() {
     dispatch(setFilter(newFilter));
   };
 
-  // filter
   const handleFilterChange = (newFilter: Partial<QueryParams>) => {
     dispatch(
       setFilter({
@@ -57,7 +56,6 @@ function ListPage() {
     );
   };
 
-  // sort
   const handleSortChange = (newSortValue: string) => {
     // salePrice:desc -> sortBy: salePrice, orderBy: desc
     const [sortBy, orderBy] = newSortValue.split(':');
@@ -86,7 +84,7 @@ function ListPage() {
                 onChange={handleSortChange}
               />
 
-              {/* Filter viewer */}
+              <FilterViewer filter={filter} onChange={handleFilterChange} />
 
               {loading && <ProductSkeletonList length={10} />}
               {!loading && <ProductList productList={productList} />}

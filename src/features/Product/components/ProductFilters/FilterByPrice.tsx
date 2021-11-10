@@ -1,8 +1,18 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { InputField } from 'components/FormFields';
 import { QueryParams } from 'models';
 import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+
+const schema = yup.object().shape({
+  min: yup.number().min(0, 'Giá trị nhỏ nhất là 0'),
+  max: yup.number().test('invalid', 'Giá trị lớn nhất không hợp lệ', (value, context) => {
+    if (!value) return false;
+    return value >= context.parent.min;
+  }),
+});
 
 export interface FilterByPriceProps {
   onChange?: (newFilter: Partial<QueryParams>) => void;
@@ -19,13 +29,14 @@ export function FilterByPrice({ onChange }: FilterByPriceProps) {
       min: 0,
       max: 0,
     },
-    // resolver: yupResolver(schema),
+
+    resolver: yupResolver(schema),
   });
 
   const handleFormSubmit = async (formValues: PricePayload) => {
     const newFilter = {
-      salePrice_gte: Number(formValues.min) || undefined,
-      salePrice_lte: Number(formValues.max) || undefined,
+      salePrice_gte: Number(formValues.min),
+      salePrice_lte: Number(formValues.max),
       _page: 1,
     };
 

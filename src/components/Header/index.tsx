@@ -110,7 +110,7 @@ function Header() {
             </LinkStyled>
           )}
 
-          {isShoppingCartMode && (
+          {isShoppingCartMode && totalCartItem > 0 && (
             <LinkStyled to="/cart">
               <IconButton color="inherit">
                 <Badge badgeContent={totalCartItem} color="warning">
