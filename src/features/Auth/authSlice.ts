@@ -31,7 +31,7 @@ export const register = createAsyncThunk('auth/register', async (payload: Regist
 });
 
 const initialState: AuthState = {
-  currentUser: JSON.parse(localStorage.getItem(StorageKeys.USER) || 'null') || {},
+  currentUser: JSON.parse(localStorage.getItem(StorageKeys.USER) || '{}') || {},
 };
 
 const authSlice = createSlice({

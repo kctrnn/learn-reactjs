@@ -148,7 +148,7 @@ function Header() {
           horizontal: 'right',
         }}
       >
-        <MenuItem>{`Hi ${currentUser.username} 👋`}</MenuItem>
+        <MenuItem>{`Hi ${currentUser.username || '👋🏻'} 👋`}</MenuItem>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
 
